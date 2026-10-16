@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Cotizador en línea de T&J Diseño & Publicidad">
+<title>Cotizador | T&J Diseño & Publicidad</title>
+
+<link rel="icon" type="image/png" href="./logo.png?v=6">
+<link rel="apple-touch-icon" href="./logo.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<style>
+/* ============================================================
+   APPLE-STYLE + CMYK T&J
+============================================================ */
+:root{
+  --apple-bg:        #f5f5f7;
+  --apple-card:      #ffffff;
+  --apple-text:      #1d1d1f;
+  --apple-text-soft: #6e6e73;
+  --apple-text-mute: #86868b;
+  --apple-border:    rgba(0,0,0,.08);
+  --apple-border-2:  rgba(0,0,0,.12);
+  --apple-radius:    18px;
+  --apple-radius-sm: 12px;
+  --apple-shadow:    0 4px 24px rgba(0,0,0,.06);
+  --apple-shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+  --apple-transition: all .35s cubic-bezier(.4,0,.2,1);
+
+  --tj-cyan:    #00aeef;
+  --tj-magenta: #ec008c;
+  --tj-yellow:  #fff200;
+  --tj-dark:    #111827;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+html,body{margin:0;padding:0;}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",
+              "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--apple-bg);
+  color:var(--apple-text);
+  padding:40px 20px calc(40px + env(safe-area-inset-bottom));
+  min-height:100vh;
+  line-height:1.47059;
+  letter-spacing:-.022em;
+  font-size:17px;
+}
+
+/* ============================================================
+   CARD PRINCIPAL
+============================================================ */
+.apple-card{
+  max-width:520px;
+  margin:0 auto;
+  background:var(--apple-card);
+  border-radius:var(--apple-radius);
+  box-shadow:var(--apple-shadow-lg);
+  overflow:hidden;
+  position:relative;
+  animation:appleFadeIn .5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes appleFadeIn{
+  from{opacity:0;transform:translateY(12px) scale(.98);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.apple-card::before{
+  content:"";
+  display:block;
+  height:4px;
+  background:linear-gradient(to right,
+    var(--tj-cyan) 33.3%,
+    var(--tj-yellow) 33.3% 66.6%,
+    var(--tj-magenta) 66.6%);
+}
+
+.apple-card::after{
+  content:"";
+  display:block;
+  height:4px;
+  background:linear-gradient(to right,
+    var(--tj-cyan) 33.3%,
+    var(--tj-yellow) 33.3% 66.6%,
+    var(--tj-magenta) 66.6%);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.apple-header{
+  text-align:center;
+  padding:36px 24px 28px;
+  background:var(--apple-card);
+  border-bottom:1px solid var(--apple-border);
+  position:relative;
+}
+
+.apple-logo-wrap{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:88px;
+  height:88px;
+  border-radius:22px;
+  background:linear-gradient(135deg,
+    rgba(0,174,239,.10) 0%,
+    rgba(255,242,0,.10) 50%,
+    rgba(236,0,140,.10) 100%);
+  margin-bottom:16px;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.8),
+             0 4px 12px rgba(0,0,0,.06);
+  position:relative;
+}
+
+.apple-logo-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:24px;
+  padding:2px;
+  background:linear-gradient(135deg,
+    var(--tj-cyan),
+    var(--tj-yellow),
+    var(--tj-magenta));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  opacity:.5;
+  pointer-events:none;
+}
+
+.apple-logo-wrap img{
+  width:60px;
+  height:auto;
+  object-fit:contain;
+  position:relative;
+  z-index:1;
+}
+
+.apple-title{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:-.03em;
+  margin:0 0 4px;
+  color:var(--apple-text);
+}
+
+.apple-subtitle{
+  font-size:15px;
+  font-weight:400;
+  color:var(--apple-text-soft);
+  letter-spacing:-.01em;
+  margin:0;
+}
+
+/* ============================================================
+   BODY
+============================================================ */
+.apple-body{
+  padding:28px 24px 32px;
+}
+
+.apple-field{
+  margin-bottom:20px;
+}
+
+.apple-label{
+  display:block;
+  font-size:13px;
+  font-weight:500;
+  color:var(--apple-text-soft);
+  margin-bottom:8px;
+  letter-spacing:-.01em;
+}
+
+/* ============================================================
+   INPUTS / SELECTS
+============================================================ */
+.apple-input,
+.apple-select{
+  width:100%;
+  padding:14px 16px;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:400;
+  color:var(--apple-text);
+  background:#fafafa;
+  border:1px solid var(--apple-border-2);
+  border-radius:var(--apple-radius-sm);
+  outline:none;
+  transition:var(--apple-transition);
+  letter-spacing:-.01em;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+.apple-input:focus,
+.apple-select:focus{
+  background:#fff;
+  border-color:var(--tj-cyan);
+  box-shadow:0 0 0 4px rgba(0,174,239,.14);
+}
+
+.apple-select{
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%236e6e73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-right:40px;
+  cursor:pointer;
+}
+
+.apple-input[readonly]{
+  background:#f0f0f2;
+  color:var(--apple-text-mute);
+  cursor:not-allowed;
+}
+
+.apple-search{
+  position:relative;
+  margin-bottom:20px;
+}
+
+.apple-search input{
+  padding-left:44px;
+  background:#fafafa;
+}
+
+.apple-search::before{
+  content:"";
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='7' cy='7' r='5' stroke='%2386868b' stroke-width='1.6'/%3E%3Cpath d='M11 11L14 14' stroke='%2386868b' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-size:contain;
+  pointer-events:none;
+}
+
+/* ============================================================
+   INFO BOX (tarifa)
+============================================================ */
+.apple-info{
+  background:linear-gradient(135deg,
+    rgba(0,174,239,.06) 0%,
+    rgba(0,174,239,.02) 100%);
+  border-left:3px solid var(--tj-cyan);
+  border-radius:4px var(--apple-radius-sm) var(--apple-radius-sm) 4px;
+  padding:14px 18px;
+  margin-bottom:22px;
+  font-size:14px;
+  color:var(--apple-text-soft);
+  letter-spacing:-.01em;
+  line-height:1.5;
+}
+
+/* ============================================================
+   GRID 2 COLUMNAS
+============================================================ */
+.apple-grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* ============================================================
+   BOTÓN PRINCIPAL
+============================================================ */
+.apple-btn{
+  width:100%;
+  padding:16px 24px;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:#fff;
+  background:linear-gradient(135deg,
+    var(--tj-cyan) 0%,
+    var(--tj-magenta) 100%);
+  background-size:200% 200%;
+  background-position:0% 50%;
+  border:none;
+  border-radius:980px;
+  cursor:pointer;
+  transition:background-position .5s cubic-bezier(.4,0,.2,1),
+             transform .2s cubic-bezier(.4,0,.2,1),
+             box-shadow .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 16px rgba(236,0,140,.20);
+  position:relative;
+  overflow:hidden;
+}
+
+.apple-btn:hover{
+  background-position:100% 50%;
+  box-shadow:0 6px 22px rgba(236,0,140,.30);
+}
+
+.apple-btn:active{
+  transform:scale(.98);
+}
+
+/* ============================================================
+   RESULT BOX
+============================================================ */
+.apple-result{
+  background:#fafafa;
+  border-radius:var(--apple-radius);
+  padding:32px 24px;
+  text-align:center;
+  margin-top:24px;
+  border:1.5px solid transparent;
+  background-image:
+    linear-gradient(#fafafa, #fafafa),
+    linear-gradient(135deg,
+      var(--tj-cyan),
+      var(--tj-yellow),
+      var(--tj-magenta));
+  background-origin:border-box;
+  background-clip:padding-box, border-box;
+  animation:appleFadeIn .4s cubic-bezier(.4,0,.2,1);
+}
+
+.apple-result-label{
+  font-size:12px;
+  font-weight:500;
+  color:var(--apple-text-mute);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+
+.apple-result-amount{
+  font-size:52px;
+  font-weight:800;
+  letter-spacing:-.04em;
+  margin:0 0 8px;
+  line-height:1.05;
+  background:linear-gradient(135deg,
+    var(--tj-magenta) 0%,
+    var(--tj-cyan) 100%);
+  -webkit-background-clip:text;
+          background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:var(--tj-magenta);
+}
+
+.apple-result-detail{
+  font-size:14px;
+  color:var(--apple-text-soft);
+  margin-bottom:20px;
+  letter-spacing:-.01em;
+}
+
+.apple-btn-add{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:12px 24px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:600;
+  color:var(--tj-cyan);
+  background:transparent;
+  border:1.5px solid var(--tj-cyan);
+  border-radius:980px;
+  cursor:pointer;
+  transition:var(--apple-transition);
+  letter-spacing:-.01em;
+}
+
+.apple-btn-add:hover{
+  background:var(--tj-cyan);
+  color:#fff;
+  box-shadow:0 4px 14px rgba(0,174,239,.25);
+}
+
+/* ============================================================
+   CARRITO
+============================================================ */
+.apple-cart{
+  margin-top:28px;
+  padding:22px 20px 20px;
+  background:#fafafa;
+  border-radius:var(--apple-radius);
+  border:1px solid var(--apple-border);
+  animation:appleFadeIn .4s cubic-bezier(.4,0,.2,1);
+}
+
+.apple-cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:16px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--apple-border);
+  flex-wrap:wrap;
+}
+
+.apple-cart-title{
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:-.02em;
+  margin:0;
+  color:var(--apple-text);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.apple-cart-title::before{
+  content:"";
+  display:inline-block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--tj-cyan),var(--tj-magenta));
+}
+
+.apple-cart-count{
+  font-size:12px;
+  font-weight:500;
+  color:var(--apple-text-mute);
+  background:#fff;
+  padding:3px 10px;
+  border-radius:980px;
+  border:1px solid var(--apple-border);
+  white-space:nowrap;
+}
+
+.apple-actions{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.apple-action-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:10px 8px;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:500;
+  color:var(--apple-text-soft);
+  background:#fff;
+  border:1px solid var(--apple-border);
+  border-radius:10px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:var(--apple-transition);
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  min-width:0;
+}
+
+.apple-action-btn:hover{
+  background:#fff;
+  border-color:var(--apple-border-2);
+  color:var(--apple-text);
+  transform:translateY(-1px);
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.apple-action-btn.danger{color:#ff3b30;}
+.apple-action-btn.danger:hover{
+  background:#fff5f5;
+  border-color:#ffd6d3;
+}
+
+.apple-action-btn.wsp{
+  color:#fff;
+  background:#34c759;
+  border-color:#34c759;
+}
+.apple-action-btn.wsp:hover{
+  background:#2fb350;
+  border-color:#2fb350;
+  box-shadow:0 4px 12px rgba(52,199,89,.25);
+}
+
+.apple-cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:14px 16px;
+  background:#fff;
+  border-radius:var(--apple-radius-sm);
+  margin-bottom:8px;
+  border:1px solid var(--apple-border);
+  transition:var(--apple-transition);
+  position:relative;
+  overflow:hidden;
+  animation:appleFadeIn .3s cubic-bezier(.4,0,.2,1);
+}
+
+.apple-cart-item:last-of-type{
+  margin-bottom:14px;
+}
+
+.apple-cart-item::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:linear-gradient(to bottom,
+    var(--tj-cyan),
+    var(--tj-magenta));
+}
+
+.apple-cart-item:hover{
+  border-color:var(--apple-border-2);
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.apple-item-info{flex:1;min-width:0;}
+
+.apple-item-name{
+  font-size:14px;
+  font-weight:600;
+  color:var(--apple-text);
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.apple-item-detail{
+  font-size:11px;
+  color:var(--apple-text-mute);
+  margin-top:2px;
+  letter-spacing:-.01em;
+}
+
+.apple-item-price{
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:-.02em;
+  color:var(--apple-text);
+  white-space:nowrap;
+}
+
+.apple-qty{
+  display:inline-flex;
+  align-items:center;
+  background:#fafafa;
+  border:1px solid var(--apple-border);
+  border-radius:8px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.apple-qty button{
+  background:transparent;
+  border:none;
+  padding:3px 9px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--apple-text-soft);
+  cursor:pointer;
+  transition:var(--apple-transition);
+}
+
+.apple-qty button:hover{
+  background:#f0f0f2;
+  color:var(--tj-cyan);
+}
+
+.apple-qty span{
+  padding:3px 9px;
+  font-size:12px;
+  font-weight:600;
+  min-width:26px;
+  text-align:center;
+  color:var(--apple-text);
+}
+
+.apple-remove{
+  background:transparent;
+  border:none;
+  color:var(--apple-text-mute);
+  font-size:20px;
+  line-height:1;
+  padding:2px 6px;
+  cursor:pointer;
+  transition:var(--apple-transition);
+  border-radius:6px;
+}
+
+.apple-remove:hover{
+  color:#ff3b30;
+  background:#fff5f5;
+}
+
+.apple-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  background:var(--tj-dark);
+  border-radius:var(--apple-radius-sm);
+  margin-top:0;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.apple-total::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(to right,
+    var(--tj-cyan) 33.3%,
+    var(--tj-yellow) 33.3% 66.6%,
+    var(--tj-magenta) 66.6%);
+}
+
+.apple-total-label{
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.05em;
+  opacity:.65;
+  text-transform:uppercase;
+}
+
+.apple-total-value{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.03em;
+  color:var(--tj-yellow);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.apple-footer{
+  text-align:center;
+  padding:24px;
+  font-size:12px;
+  color:var(--apple-text-mute);
+  line-height:1.6;
+  letter-spacing:-.01em;
+  background:#fafafa;
+  border-top:1px solid var(--apple-border);
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--apple-text);
+  color:#fff;
+  padding:12px 22px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:500;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  opacity:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  z-index:9999;
+  pointer-events:none;
+  letter-spacing:-.01em;
+  max-width:calc(100% - 32px);
+  text-align:center;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   LOADING SHIMMER
+============================================================ */
+.loading-shimmer{
+  display:inline-block;
+  width:100%;
+  height:14px;
+  background:linear-gradient(90deg,#e8e8ed 0%,#f5f5f7 50%,#e8e8ed 100%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s infinite;
+  border-radius:4px;
+}
+
+@keyframes shimmer{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
+
+/* ============================================================
+   📱 RESPONSIVE
+============================================================ */
+@media (max-width: 400px){
+  .apple-actions{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .apple-action-btn.wsp{
+    grid-column: span 2;
+  }
+  .apple-action-btn{
+    font-size:11px;
+    padding:9px 6px;
+  }
+}
+
+@media(max-width:480px){
+  body{padding:24px 12px calc(24px + env(safe-area-inset-bottom));}
+  .apple-body{padding:24px 20px 28px;}
+  .apple-title{font-size:24px;}
+  .apple-result-amount{font-size:44px;}
+
+  .apple-cart{
+    padding:18px 14px 16px;
+  }
+  .apple-cart-item{
+    padding:12px 14px;
+  }
+  .apple-item-name{
+    font-size:13px;
+  }
+  .apple-item-price{
+    font-size:14px;
+  }
+  .apple-total{
+    padding:14px 16px;
+  }
+  .apple-total-value{
+    font-size:20px;
+  }
+}
+
+/* ============================================================
+   PRINT
+============================================================ */
+@media print{
+  body{background:#fff !important;padding:0;}
+  .apple-card{box-shadow:none;border:1px solid #e0e0e0;border-radius:0;}
+  .apple-actions,
+  .apple-btn,
+  .apple-btn-add,
+  .apple-result,
+  .apple-search{display:none !important;}
+  .apple-card::before,
+  .apple-card::after{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .apple-total::before{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="apple-card">
+
+  <div class="apple-header">
+    <div class="apple-logo-wrap">
+      <img src="./logo.png" alt="T&J" onerror="this.style.display='none'">
+    </div>
+    <h1 class="apple-title">Cotizador</h1>
+    <p class="apple-subtitle">T&J Diseño & Publicidad</p>
+  </div>
+
+  <div class="apple-body">
+
+    <div class="apple-search">
+      <input class="apple-input" type="text" id="buscador"
+             placeholder="Buscar producto..."
+             oninput="filtrarProductos()" autocomplete="off">
+    </div>
+
+    <div class="apple-field">
+      <label class="apple-label" for="producto">Producto</label>
+      <select class="apple-select" id="producto" onchange="cambiarProducto()">
+        <option value="">Cargando catálogo...</option>
+      </select>
+    </div>
+
+    <div class="apple-info" id="infoPrecio">
+      <span class="loading-shimmer"></span>
+    </div>
+
+    <div id="camposMedida" style="display:none;">
+      <div class="apple-field">
+        <div class="apple-grid-2">
+          <div>
+            <label class="apple-label" id="lblBase">Base (m)</label>
+            <input class="apple-input" type="number" id="base" value="1.00"
+                   step="0.01" min="0.01" inputmode="decimal">
+          </div>
+          <div>
+            <label class="apple-label" id="lblAltura">Altura (m)</label>
+            <input class="apple-input" type="number" id="altura" value="1.00"
+                   step="0.01" min="0.01" inputmode="decimal">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="apple-field">
+      <label class="apple-label" id="lblCantidad">Cantidad</label>
+      <input class="apple-input" type="number" id="cantidad" value="1"
+             min="1" step="1" inputmode="numeric">
+    </div>
+
+    <button class="apple-btn" onclick="calcular()">Calcular presupuesto</button>
+
+    <div class="apple-result" id="boxResultado" style="display:none;">
+      <div class="apple-result-label">Subtotal estimado</div>
+      <div class="apple-result-amount" id="resMonto">$0.00</div>
+      <div class="apple-result-detail" id="resDetalle"></div>
+      <button class="apple-btn-add" onclick="agregarAlCarrito()">+ Añadir a la lista</button>
+    </div>
+
+    <div class="apple-cart" id="seccionCarrito" style="display:none;">
+      <div class="apple-cart-header">
+        <h2 class="apple-cart-title">Tu cotización</h2>
+        <span class="apple-cart-count" id="cartCount">0 items</span>
+      </div>
+
+      <div class="apple-actions">
+        <button class="apple-action-btn danger" onclick="limpiarCarrito()">🗑️ Borrar</button>
+        <button class="apple-action-btn" onclick="window.print()">🖨️ Imprimir</button>
+        <a id="btnWsp" href="#" target="_blank" rel="noopener" class="apple-action-btn wsp">📲 WhatsApp</a>
+      </div>
+
+      <div id="listaCarrito"></div>
+
+      <div class="apple-total">
+        <span class="apple-total-label">Total</span>
+        <span class="apple-total-value" id="granTotal">$0.00</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="apple-footer">
+    Precios no incluyen I.V.A. Ni Elaboración de Diseño.<br>
+    © <span id="year"></span> T&J Diseño & Publicidad
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN
+============================================================ */
+const URL_GOOGLE_SHEETS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQVJJlHkdYlgjZj373bUyWGygN2bwfIs0Qi_QvtNj9eVboRJwq3rT9BA_Wjo1ePb5FyRx7vGCZix1BE/pub?output=csv";
+const TEL_WHATSAPP = "526674520598";
+const CACHE_KEY_PRODUCTOS = "tj_productos_v1";
+const CACHE_KEY_CARRITO   = "tj_carrito_v1";
+
+let DB_PRODUCTOS = {};
+let itemActual = null;
+let carrito = JSON.parse(localStorage.getItem(CACHE_KEY_CARRITO) || "[]");
+
+/* ============================================================
+   UTILIDADES
+============================================================ */
+function esc(str){
+  return String(str ?? "").replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function fmt(n){
+  return "$" + Number(n).toFixed(2);
+}
+
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2000);
+}
+
+/* ============================================================
+   PARSER CSV ROBUSTO
+============================================================ */
+function parseCSV(text){
+  const rows = [];
+  let row = [], field = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (inQuotes){
+      if (c === '"'){
+        if (text[i+1] === '"'){ field += '"'; i++; }
+        else inQuotes = false;
+      } else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ','){ row.push(field); field = ""; }
+      else if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ""; }
+      else if (c === '\r'){ /* ignorar */ }
+      else field += c;
+    }
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+/* ============================================================
+   CARGA DE PRODUCTOS
+============================================================ */
+async function cargarDesdeGoogleSheets(){
+  mostrarLoadingInfo();
+
+  const cached = localStorage.getItem(CACHE_KEY_PRODUCTOS);
+  if (cached){
+    try {
+      DB_PRODUCTOS = JSON.parse(cached);
+      poblarSelect();
+    } catch(e){ /* ignorar caché corrupto */ }
+  }
+
+  try {
+    const proxied = "https://corsproxy.io/?" + encodeURIComponent(URL_GOOGLE_SHEETS);
+    let r;
+    try { r = await fetch(proxied, { cache: "no-store" }); }
+    catch(e){ r = null; }
+
+    if (!r || !r.ok){
+      r = await fetch(URL_GOOGLE_SHEETS, { cache: "no-store" });
+    }
+    if (!r.ok) throw new Error("HTTP " + r.status);
+
+    const csv = await r.text();
+    const filas = parseCSV(csv);
+    const nuevaDB = {};
+
+    for (let i = 1; i < filas.length; i++){
+      const f = filas[i];
+      if (!f || f.length < 4) continue;
+      const [id, nombre, tipo, precio, info] = f;
+      if (!id?.trim() || !nombre?.trim()) continue;
+
+      nuevaDB[id.trim()] = {
+        nombre: nombre.trim(),
+        tipo: (tipo || "unidad").trim().toLowerCase(),
+        precio: parseFloat(precio) || 0,
+        info: (info || `Tarifa: $${precio}`).trim()
+      };
+    }
+
+    if (Object.keys(nuevaDB).length === 0) throw new Error("Catálogo vacío");
+
+    DB_PRODUCTOS = nuevaDB;
+    localStorage.setItem(CACHE_KEY_PRODUCTOS, JSON.stringify(nuevaDB));
+    poblarSelect();
+  } catch(err){
+    console.error("Error cargando productos:", err);
+    if (!cached){
+      document.getElementById("producto").innerHTML =
+        '<option value="">⚠️ Error al cargar catálogo</option>';
+      document.getElementById("infoPrecio").textContent =
+        "No se pudieron cargar los productos. Revisa tu conexión.";
+    }
+  }
+}
+
+function mostrarLoadingInfo(){
+  document.getElementById("infoPrecio").innerHTML =
+    '<span class="loading-shimmer"></span>';
+}
+
+/* ============================================================
+   SELECT DE PRODUCTOS
+============================================================ */
+function poblarSelect(filtro = ""){
+  const select = document.getElementById("producto");
+  const prev = select.value;
+  select.innerHTML = "";
+
+  const q = filtro.trim().toLowerCase();
+  const entries = Object.entries(DB_PRODUCTOS)
+    .filter(([k, v]) => !q || v.nombre.toLowerCase().includes(q));
+
+  if (entries.length === 0){
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "Sin resultados";
+    select.appendChild(opt);
+    cambiarProducto();
+    return;
+  }
+
+  entries.forEach(([key, p]) => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = p.nombre;
+    select.appendChild(opt);
+  });
+
+  if (prev && DB_PRODUCTOS[prev]) select.value = prev;
+  cambiarProducto();
+}
+
+function filtrarProductos(){
+  poblarSelect(document.getElementById("buscador").value);
+}
+
+/* ============================================================
+   CAMBIO DE PRODUCTO
+============================================================ */
+function cambiarProducto(){
+  const key = document.getElementById("producto").value;
+  const infoEl = document.getElementById("infoPrecio");
+  const boxMedida = document.getElementById("camposMedida");
+  const baseInp = document.getElementById("base");
+  const altInp  = document.getElementById("altura");
+  const cantLbl = document.getElementById("lblCantidad");
+
+  if (!key || !DB_PRODUCTOS[key]){
+    infoEl.textContent = "Selecciona un producto para ver su tarifa.";
+    boxMedida.style.display = "none";
+    return;
+  }
+
+  const p = DB_PRODUCTOS[key];
+  infoEl.textContent = p.info;
+  document.getElementById("boxResultado").style.display = "none";
+
+  boxMedida.style.display = "none";
+  baseInp.readOnly = false;
+  baseInp.value = "1.00";
+  altInp.value  = "1.00";
+  cantLbl.textContent = "Cantidad";
+
+  if (p.tipo === "m2"){
+    boxMedida.style.display = "block";
+    cantLbl.textContent = "Cantidad de piezas";
+  } else if (p.tipo === "lineal_dtf"){
+    boxMedida.style.display = "block";
+    baseInp.value = "0.60";
+    baseInp.readOnly = true;
+    cantLbl.textContent = "Cantidad de ejemplares";
+  } else if (p.tipo === "millar"){
+    cantLbl.textContent = "Cantidad (Millares)";
+  }
+}
+
+/* ============================================================
+   CÁLCULO
+============================================================ */
+function calcular(){
+  const key = document.getElementById("producto").value;
+  if (!key || !DB_PRODUCTOS[key]){ toast("Selecciona un producto"); return; }
+
+  const p = DB_PRODUCTOS[key];
+  const cantidad = parseFloat(document.getElementById("cantidad").value);
+
+  if (!Number.isFinite(cantidad) || cantidad <= 0){
+    toast("La cantidad debe ser mayor a 0");
+    return;
+  }
+
+  let total = 0, detalle = "";
+
+  if (p.tipo === "millar" || p.tipo === "unidad"){
+    total = p.precio * cantidad;
+    detalle = p.tipo === "millar"
+      ? `${cantidad} millar(es) × ${fmt(p.precio)}`
+      : `${cantidad} pieza(s) × ${fmt(p.precio)}`;
+  } else if (p.tipo === "m2"){
+    const b = parseFloat(document.getElementById("base").value);
+    const a = parseFloat(document.getElementById("altura").value);
+    if (!(b > 0) || !(a > 0)){ toast("Base y altura deben ser > 0"); return; }
+    total = b * a * p.precio * cantidad;
+    detalle = `${b}m × ${a}m | ${cantidad} pieza(s) | ${fmt(p.precio)}/m²`;
+  } else if (p.tipo === "lineal_dtf"){
+    const a = parseFloat(document.getElementById("altura").value);
+    if (!(a > 0)){ toast("La altura debe ser > 0"); return; }
+    const pUnitario = a <= 0.20 ? 100 : (0.60 * a) * p.precio;
+    total = pUnitario * cantidad;
+    detalle = `0.60m × ${a}m | ${cantidad} ejemplar(es)`;
+  } else {
+    total = p.precio * cantidad;
+    detalle = `${cantidad} × ${fmt(p.precio)}`;
+  }
+
+  itemActual = { nombre: p.nombre, total, detalle, cantidad };
+
+  document.getElementById("resMonto").textContent = fmt(total);
+  document.getElementById("resDetalle").textContent = detalle;
+  document.getElementById("boxResultado").style.display = "block";
+}
+
+/* ============================================================
+   CARRITO
+============================================================ */
+function agregarAlCarrito(){
+  if (!itemActual) return;
+  carrito.push({ ...itemActual, uid: Date.now() + Math.random() });
+  guardarCarrito();
+  renderCarrito();
+  document.getElementById("boxResultado").style.display = "none";
+  toast("Producto añadido ✓");
+}
+
+function guardarCarrito(){
+  localStorage.setItem(CACHE_KEY_CARRITO, JSON.stringify(carrito));
+}
+
+function renderCarrito(){
+  const sec  = document.getElementById("seccionCarrito");
+  const list = document.getElementById("listaCarrito");
+
+  if (carrito.length === 0){
+    sec.style.display = "none";
+    return;
+  }
+  sec.style.display = "block";
+  list.innerHTML = "";
+
+  let granTotal = 0;
+  carrito.forEach((item, i) => {
+    granTotal += item.total;
+
+    const div = document.createElement("div");
+    div.className = "apple-cart-item";
+    div.innerHTML = `
+      <div class="apple-item-info">
+        <div class="apple-item-name">${esc(item.nombre)}</div>
+        <div class="apple-item-detail">${esc(item.detalle)}</div>
+        <div class="apple-qty">
+          <button title="Menos" onclick="cambiarCantidad(${i},-1)">−</button>
+          <span>${item.cantidad ?? 1}</span>
+          <button title="Más" onclick="cambiarCantidad(${i},1)">+</button>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div class="apple-item-price">${fmt(item.total)}</div>
+        <button class="apple-remove" title="Eliminar"
+                onclick="eliminarItem(${i})">×</button>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+
+  document.getElementById("granTotal").textContent = fmt(granTotal);
+
+  const totalItems = carrito.reduce((s, it) => s + (it.cantidad ?? 1), 0);
+  document.getElementById("cartCount").textContent =
+    totalItems + (totalItems === 1 ? " item" : " items");
+
+  let msg = "Hola *T&J Diseño & Publicidad*, solicito cotización:\n\n";
+  carrito.forEach(it => {
+    msg += `• *${it.nombre}*\n  ${it.detalle}\n  Subtotal: ${fmt(it.total)} MXN\n\n`;
+  });
+  msg += `*Total Estimado: ${fmt(granTotal)} MXN*\n`;
+  msg += `_Los precios no incluyen I.V.A. ni diseño._`;
+
+  document.getElementById("btnWsp").href =
+    `https://wa.me/${TEL_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+}
+
+function cambiarCantidad(i, delta){
+  const item = carrito[i];
+  if (!item) return;
+  const nueva = Math.max(1, (item.cantidad ?? 1) + delta);
+  item.total = (item.total / (item.cantidad ?? 1)) * nueva;
+  item.cantidad = nueva;
+  guardarCarrito();
+  renderCarrito();
+}
+
+function eliminarItem(i){
+  carrito.splice(i, 1);
+  guardarCarrito();
+  renderCarrito();
+}
+
+function limpiarCarrito(){
+  if (carrito.length && !confirm("¿Borrar toda la cotización?")) return;
+  carrito = [];
+  guardarCarrito();
+  renderCarrito();
+  toast("Cotización borrada");
+}
+
+/* ============================================================
+   INICIALIZACIÓN
+============================================================ */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Service Worker básico — la versión simple que SÍ funciona
+if ("serviceWorker" in navigator){
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(e =>
+      console.warn("SW no registrado:", e));
+  });
+}
+
+cargarDesdeGoogleSheets();
+renderCarrito();
+</script>
+</body>
+</html>
