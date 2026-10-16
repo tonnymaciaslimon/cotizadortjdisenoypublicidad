@@ -11,9 +11,29 @@
   "theme_color": "#111827",
   "categories": ["business", "productivity"],
   "icons": [
-    { "src": "./logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "./logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "./logo.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "./logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "./Logo TJ Diseño y Publicidad RGB Contorno Blanco PNG.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Logo TJ Diseño y Publicidad RGB Contorno Blanco PNG.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Logo TJ Diseño y Publicidad RGB Contorno Blanco PNG.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./Logo TJ Diseño y Publicidad RGB Contorno Blanco PNG.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
-} 
+}
